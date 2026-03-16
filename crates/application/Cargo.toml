@@ -1,0 +1,13 @@
+[package]
+name = "application"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+uuid = { workspace = true }
+chrono = { workspace = true }
+anyhow = "1.0.102"
+
+domain = { path = "../domain" }
+shared = { path = "../shared" }
+async-trait = "0.1.89"

@@ -1,0 +1,16 @@
+[package]
+name = "apps"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = "0.8.8"
+dotenvy = "0.15"
+utoipa = "5.4.0"
+
+tokio = { workspace = true }
+
+domain = { path = "../crates/domain" }
+infra = { path = "../crates/infra" }
+interfaces = { path = "../crates/interfaces" }
+application = { path = "../crates/application" }

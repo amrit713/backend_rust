@@ -1,0 +1,17 @@
+[package]
+name = "interfaces"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = "0.8.8"
+serde = { workspace = true }
+uuid = { workspace = true }
+tokio = { workspace = true }
+chrono = { workspace = true }
+
+domain = { path = "../domain" }
+application = { path = "../application" }
+infra = { path = "../infra" }
+shared = { path = "../shared" }
+anyhow.workspace = true
