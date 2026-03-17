@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+utoipa = { version = "5.0", features = ["axum_extras", "chrono", "uuid"] }
+
 serde = { workspace = true }
 uuid = { workspace = true }
 chrono = { workspace = true }

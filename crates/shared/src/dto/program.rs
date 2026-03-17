@@ -1,9 +1,10 @@
 use chrono::{DateTime, Utc};
 use domain::program::entity::{Difficulty, Program};
 use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 use uuid::Uuid;
 
-#[derive(Debug, serde::Deserialize)]
+#[derive(Debug, serde::Deserialize, ToSchema)]
 pub struct UpdateProgramDTO {
     pub title: Option<String>,
     pub description: Option<String>,
@@ -11,7 +12,7 @@ pub struct UpdateProgramDTO {
     pub difficulty: Option<Difficulty>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 pub struct CreateProgramDTO {
     pub title: String,
     pub description: Option<String>,
@@ -20,7 +21,7 @@ pub struct CreateProgramDTO {
     pub category_id: Uuid,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 pub struct ProgramResponseDTO {
     pub id: Uuid,
     pub title: String,

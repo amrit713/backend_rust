@@ -1,7 +1,10 @@
 use chrono::{DateTime, Utc};
+use utoipa::ToSchema;
 use uuid::Uuid;
 
-#[derive(Debug, Clone, Copy, PartialEq, serde::Serialize, serde::Deserialize, sqlx::Type)]
+#[derive(
+    Debug, Clone, Copy, PartialEq, serde::Serialize, serde::Deserialize, sqlx::Type, ToSchema,
+)]
 #[sqlx(type_name = "VARCHAR", rename_all = "PascalCase")]
 pub enum Difficulty {
     Beginner,

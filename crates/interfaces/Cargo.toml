@@ -5,6 +5,9 @@ edition = "2024"
 
 [dependencies]
 axum = "0.8.8"
+utoipa = { version = "5.0", features = ["axum_extras"] }
+
+
 serde = { workspace = true }
 uuid = { workspace = true }
 tokio = { workspace = true }

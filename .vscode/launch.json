@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug API (Workspace)",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/target/debug/apps",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "RUST_LOG": "debug",
+                "DATABASE_URL": "postgres://postgres:postgres@localhost/thecncstudio"
+            },
+            "sourceLanguages": [
+                "rust"
+            ]
+        }
+    ]
+}

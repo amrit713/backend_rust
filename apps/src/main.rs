@@ -1,6 +1,7 @@
 use application::services::{category_service::CategoryService, program_service::ProgramService};
 use infra::db::connection::create_pool;
 use infra::repo::{category_repo::SqlxCategoryRepo, program_repo::SqlxProgramRepo};
+use interfaces::doc::api_doc::ApiDoc;
 use interfaces::routes::{category_route::category_routes, program_route::program_routes};
 use interfaces::state::app_state::AppState;
 
@@ -10,6 +11,8 @@ use axum::Router;
 use dotenvy::dotenv;
 use std::env;
 use tokio::net::TcpListener;
+use utoipa::OpenApi;
+use utoipa_scalar::{Scalar, Servable};
 
 #[tokio::main]
 async fn main() {
@@ -34,11 +37,14 @@ async fn main() {
     };
 
     let app: Router = Router::new()
+        .merge(Scalar::with_url("/scalar", ApiDoc::openapi()))
         .nest("/api/categories", category_routes())
         .nest("/api/programs", program_routes())
         .with_state(state);
 
     let listner = TcpListener::bind("127.0.0.1:4000").await.unwrap();
+
+    println!("🚀 Documentation available at http://localhost:4000/scalar");
 
     println!("Server running on http://localhost:{}", port);
 

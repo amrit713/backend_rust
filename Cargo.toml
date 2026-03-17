@@ -1,12 +1,5 @@
 [workspace]
-members = [
-    "crates/domain",
-    "crates/application",
-    "crates/infra",
-    "apps",
-    "crates/interfaces",
-    "crates/shared",
-]
+members = ["apps", "crates/*"]
 resolver = "3"
 
 

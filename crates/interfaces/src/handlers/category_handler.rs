@@ -10,6 +10,12 @@ use axum::{
 use uuid::Uuid;
 
 // !Create
+#[utoipa::path(
+    post,
+    path = "/api/categories",
+    request_body = CreateCategoryDTO,
+    responses((status = 201, body = CategoryResponseDTO))
+)]
 pub async fn create_category(
     State(state): State<AppState>,
     Json(payload): Json<CreateCategoryDTO>,
@@ -22,7 +28,12 @@ pub async fn create_category(
     ))
 }
 
-// !Find All
+// GET ALL
+#[utoipa::path(
+    get,
+    path = "/api/categories",
+    responses((status = 200, body = [CategoryResponseDTO]))
+)]
 pub async fn get_categories(State(state): State<AppState>) -> Result<impl IntoResponse, AppError> {
     let categories = state.category_service.get_categories().await?;
 
@@ -34,8 +45,13 @@ pub async fn get_categories(State(state): State<AppState>) -> Result<impl IntoRe
     Ok((StatusCode::OK, Json(response)))
 }
 
-// ! Find One
-
+// GET ONE
+#[utoipa::path(
+    get,
+    path = "/api/categories/{id}",
+    responses((status = 200, body = CategoryResponseDTO)),
+    params(("id" = Uuid, Path))
+)]
 pub async fn get_category(
     State(state): State<AppState>,
     Path(id): Path<Uuid>,
@@ -45,7 +61,14 @@ pub async fn get_category(
     Ok((StatusCode::OK, Json(CategoryResponseDTO::from(category))))
 }
 
-// ! Update
+// UPDATE (PATCH)
+#[utoipa::path(
+    patch,
+    path = "/api/categories/{id}",
+    request_body = UpdateCategoryDTO,
+    responses((status = 200, body = CategoryResponseDTO)),
+    params(("id" = Uuid, Path))
+)]
 pub async fn update_category(
     State(state): State<AppState>,
     Path(id): Path<Uuid>,
@@ -59,7 +82,13 @@ pub async fn update_category(
     Ok((StatusCode::OK, Json(CategoryResponseDTO::from(category))))
 }
 
-// !Delete
+// DELETE
+#[utoipa::path(
+    delete,
+    path = "/api/categories/{id}",
+    responses((status = 204)),
+    params(("id" = Uuid, Path))
+)]
 pub async fn delete_category(
     State(state): State<AppState>,
     Path(id): Path<Uuid>,
